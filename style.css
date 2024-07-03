@@ -34,6 +34,10 @@ body {
     background: blue;
 }
 
+.tetris .J {
+    background: magenta;
+}
+
 .tetris .I {
     background: orange;
 }
@@ -43,11 +47,15 @@ body {
 }
 
 .tetris .U {
-    background: teal;
+    background: tomato;
 }
 
 .tetris .Z {
     background: brown;
+}
+
+.tetris .S {
+    background: khaki;
 }
 
 .tetris .M {
