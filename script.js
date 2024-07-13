@@ -1,13 +1,35 @@
 const PLAYFILED_COLUMNS = 10;
 const PLAYFILED_ROWS = 20;
 let playfield;
+let cells;
 
-const TETROMINO_NAMES = ["O", "L", "J", "I", "T", "U", "Z", "S", "M", "X"];
+const TETROMINO_NAMES = [
+    "O",
+    "R",
+    "D",
+    "L",
+    "J",
+    "I",
+    "T",
+    "U",
+    "Z",
+    "S",
+    "M",
+    "X",
+];
 
 const TETROMINOS = {
     O: [
         [1, 1],
         [1, 1],
+    ],
+    R: [
+        [1, 1],
+        [1, 0],
+    ],
+    D: [
+        [1, 0],
+        [0, 0],
     ],
     L: [
         [0, 0, 1],
@@ -66,6 +88,16 @@ let tetromino = {
 
 // Common functions
 
+function init() {
+    generatePlayfield();
+    cells = document.querySelectorAll(".tetris div");
+    generateTetromino();
+
+    moveDown();
+
+    draw();
+}
+
 function convertPositionToIndex(row, col) {
     return row * PLAYFILED_COLUMNS + col;
 }
@@ -81,7 +113,7 @@ function generateTetromino() {
     const nameTetro = randomFigure(TETROMINO_NAMES);
     const matrix = TETROMINOS[nameTetro];
     const columnTetro = Math.floor(PLAYFILED_COLUMNS / 2 - matrix.length / 2);
-    const rowTetro = 0;
+    const rowTetro = -2;
 
     tetromino = {
         name: nameTetro,
@@ -195,6 +227,10 @@ function isValid() {
     return true;
 }
 
+function isOutsideOfTopGameboard(row) {
+    return tetromino.row + row < 0;
+}
+
 function isOutsideOfGameboard(row, column) {
     return (
         tetromino.matrix[row][column] &&
@@ -219,6 +255,9 @@ function drawTetromino() {
 
     for (let row = 0; row < tetrominoMatrixSize; row++) {
         for (let column = 0; column < tetrominoMatrixSize; column++) {
+            if (isOutsideOfTopGameboard(row)) {
+                continue;
+            }
             if (!tetromino.matrix[row][column]) {
                 continue;
             }
@@ -226,6 +265,9 @@ function drawTetromino() {
                 tetromino.row + row,
                 tetromino.column + column
             );
+            // if (cellIndex >= 0) {
+            //     cells[cellIndex].classList.add(name);
+            // }
 
             cells[cellIndex].classList.add(name);
         }
@@ -251,7 +293,7 @@ function placeTetromino() {
     const tetrominoMatrixSize = tetromino.matrix.length;
     for (let row = 0; row < tetrominoMatrixSize; row++) {
         for (let column = 0; column < tetrominoMatrixSize; column++) {
-            if (tetromino.matrix[row][column]) {
+            if (tetromino.matrix[row][column] && tetromino.row + row >= 0) {
                 playfield[tetromino.row + row][tetromino.column + column] =
                     tetromino.name;
             }
@@ -261,21 +303,19 @@ function placeTetromino() {
     generateTetromino();
 }
 
-function startGameLoop() {
-    const gameSpeed = 500; // Adjust the speed (milliseconds) as necessary
-    setInterval(() => {
-        moveTetrminoDown();
-        draw();
-    }, gameSpeed);
+function moveDown() {
+    moveTetrminoDown();
+    draw();
+    startGameLoop();
 }
 
-generatePlayfield();
-let cells = document.querySelectorAll(".tetris div");
-generateTetromino();
+function startGameLoop() {
+    setTimeout(() => {
+        requestAnimationFrame(moveDown);
+    }, 700);
+}
 
-draw();
-
-startGameLoop();
+init();
 
 // drawPlayfield();
 

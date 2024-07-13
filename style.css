@@ -8,10 +8,12 @@ body {
     background: linear-gradient(#094637, #642091);
     height: 100vh;
     display: flex;
-    gap: 24px;
+    flex-direction: column;
+    gap: 16px;
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
+    padding: 10px 32px;
 }
 
 .tetris {
@@ -29,6 +31,14 @@ body {
 
 .tetris .O {
     background: red;
+}
+
+.tetris .R {
+    background: yellow;
+}
+
+.tetris .D {
+    background: lawngreen;
 }
 
 .tetris .L {
@@ -68,9 +78,26 @@ body {
 }
 
 .info {
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 14px;
+}
+
+.info h1 {
+    color: rgb(237, 208, 255);
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 .info h2 {
@@ -84,10 +111,10 @@ body {
     color: rgb(37, 37, 37);
     border: 5px solid rgb(14, 119, 95);
     border-radius: 10px;
-    padding: 16px 10px;
+    padding: 4px 2px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 60px;
+    font-size: 48px;
     color: rgb(45, 12, 65);
 }
