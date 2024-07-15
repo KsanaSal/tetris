@@ -81,7 +81,7 @@ body {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     gap: 14px;
 }
@@ -117,4 +117,56 @@ body {
     align-items: center;
     font-size: 48px;
     color: rgb(45, 12, 65);
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(50, 21, 97, 0.7);
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay h2 {
+    font-size: 72px;
+    color: rgb(251, 239, 3);
+}
+
+.info-score {
+    color: rgb(3, 251, 164);
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.scores {
+    color: rgb(3, 251, 164);
+    font-size: 48px;
+    font-weight: medium;
+    font-style: italic;
+}
+
+.btn-restart {
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-size: 60px;
+    border: 5px solid rgb(27, 5, 62);
+    color: rgb(246, 242, 253);
+    background: rgb(71, 7, 173);
+    cursor: pointer;
+    box-shadow: 7px 6px 10px rgba(10, 76, 56, 0.4);
+}
+
+.btn-restart:hover {
+    color: rgb(71, 7, 173);
+    background: rgb(246, 242, 253);
+    border: 3px solid rgb(71, 7, 173);
 }
